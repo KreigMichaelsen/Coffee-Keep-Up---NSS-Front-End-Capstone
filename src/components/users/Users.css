@@ -1,0 +1,14 @@
+.users {
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.user {
+    background-color:  rgb(243, 230, 255);
+    border: 1px dotted darkmagenta;
+    color: black;
+    padding: 0.5rem;
+    margin: 0.5rem
+}
