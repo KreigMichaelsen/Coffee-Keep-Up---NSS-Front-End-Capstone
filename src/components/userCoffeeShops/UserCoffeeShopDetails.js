@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
-export const EmployeeDetails = () => {
+export const UserCoffeeShopDetails = () => {
     const {employeeId} = useParams()
     const [employee, updateEmployee] = useState({})
 

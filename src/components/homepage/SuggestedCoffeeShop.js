@@ -1,10 +1,8 @@
 import { Link, useNavigate } from "react-router-dom"
-import "./CoffeeShops.css"
-
-export const CoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops,  }) => {
+import "./HomePage.css"
+export const SuggestedCoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops, getAllFilteredUserCoffeeShops, getRandomCoffeeShops  }) => {
 
     const navigate = useNavigate()
-
 
     const deleteButton = () => {
         if (currentUser.admin) {
@@ -14,6 +12,7 @@ export const CoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops,  }
                 })
                 .then(() => {
                         getAllCoffeeShops()
+                        getRandomCoffeeShops()
                 })
             }} className="ticket_delete">Delete</button>
         }
@@ -40,7 +39,14 @@ export const CoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops,  }
                 })
                     .then(response => response.json())
                     .then(() => {
-                            getAllCoffeeShops()})
+                            getAllFilteredUserCoffeeShops()
+                            
+                            
+                           })
+                    .then(() => {
+                        
+                        getAllCoffeeShops()
+                    })
                             
                     }
             }
@@ -49,10 +55,10 @@ export const CoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops,  }
         }
     
 
-    return <section className="coffeeShop">
+
+    return <section className="suggestedCoffeeShop">
     <h3>{coffeeShopObject.name}</h3>
-     <img className="coffeeShopImage" onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}`)} style={{ width: 400, height: 225 }} src={coffeeShopObject.picture}>
-     </img>
+     <img onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}`)} style={{ width: 400, height: 225 }} src={coffeeShopObject.picture}></img>
      <footer>
         {
             coffeeShopObject.userCoffeeShops.find(shop => shop.userId === currentUser.id )
@@ -60,15 +66,15 @@ export const CoffeeShop = ({coffeeShopObject, currentUser, getAllCoffeeShops,  }
             :  AddButton()
         }
         {
-            deleteButton()
+            // deleteButton()
         }
 
         {
             <button onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}/edit`)}>Edit Coffee Shop</button>
         }
-        {/* {
-            <button onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}/review`)}>Leave a Review!</button>
-        } */}
+        {
+           
+        }
      </footer>
  </section>
 }

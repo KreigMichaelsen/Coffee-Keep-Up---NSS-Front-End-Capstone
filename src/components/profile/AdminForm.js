@@ -1,105 +1,137 @@
 import { useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
+import "./Profile.css"
+
 
 export const AdminForm = () => {
-    // TODO: Provide initial state for profile
-    
+    // TODO: This state object should not be blank
+    const [loading, setLoading] = useState(false);
+   
+
+
     const [profile, updateProfile] = useState({
-        specialty: "",
-        rate: 0,
-        userId: 0
+        fullName: "",
+        email: "",
+        isAdmin: false,
     })
-    const [feedback, setFeedback] = useState("")
 
     const localCoffeeUser = localStorage.getItem("coffee_user")
     const coffeeUserObject = JSON.parse(localCoffeeUser)
 
-    // TODO: Get employee profile info from API and update state
-
     useEffect(() => {
-        fetch(``)
-        .then(respone => respone.json())
-        .then((data) => {
-                const employeeObject = data[0]
-                updateProfile(employeeObject)
-        })
-    }, [])
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }, []);
 
+    // const [feedback, setFeedback] = useState("")
+    // TODO: What is the variable in which you stored the route parameter?
 
-useEffect(() => {
-    if (feedback !== "") {
-        // Clear feedback to make entire element disappear after 3 seconds
-        setTimeout(() => setFeedback(""), 3000);
-    }
-}, [feedback])
+    const navigate = useNavigate()
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/users?id=${coffeeUserObject.id}`)
+            .then(response => response.json())
+            .then((data) => {
+                const userObject = data[0]
+                updateProfile(userObject)
+            })
+        },
+        [] // When this array is empty, you are observing initial component state
+    ) 
 
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
-
-        /*
-            TODO: Perform the PUT fetch() call here to update the profile.
-            Navigate user to home page when done.
-        */
-       return fetch(`http://localhost:8088/employees/${profile.id}`, {
+        return fetch(`http://localhost:8088/users/${profile.id}`, {
             method: "PUT",
             headers: {
-                "Content-type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(profile)
-       })
-            .then(respone => respone.json())
+        })
+            .then(response => response.json())
             .then(() => {
-                setFeedback("Employee profile successfully saved")
+                navigate("/")
+                // window.alert("Profile successfully saved")
+                // setFeedback("Coffee Shop Updated Successfully!")
             })
+        // TODO: Write the fetch for the PUT request to replace the object being edited
     }
 
-    return (
-        
-        <form className="profile">
-            <div className={`${feedback.includes("Error") ? "error" : "feedback"} ${feedback === "" ? "invisible" : "visible"}`}>
-                {feedback}
+
+    return <div className="container">
+    {loading ? (
+      <div className="loader-container">
+      </div>
+    ) : (
+      <div className="adminEditFormContainer">
+        <form className="adminEditForm">
+        <h1 className="adminEditFormHeader">Edit User</h1> 
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="name">Name:</label>
+                <input
+                    required autoFocus
+                    type="text"
+                    className="form-control"
+                    value={profile?.fullName}
+                    onChange={
+                        (event) => {
+                            const copy = { ...profile }
+                            copy.fullName = event.target.value
+                            updateProfile(copy)
+                        }
+                    }></input>
             </div>
-            <h2 className="profile__title">New Service Ticket</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="specialty">Specialty:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        value={profile.specialty}
-                        onChange={
-                            (event) => {
-                                // TODO: Update specialty property
-                                const copy = {...profile}
-                                copy.specialty = event.target.value
-                                updateProfile(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Hourly rate:</label>
-                    <input type="number"
-                        className="form-control"
-                        value={profile.rate}
-                        onChange={
-                            (event) => {
-                                // TODO: Update specialty property
-                                const copy = {...profile}
-                                copy.rate = parseFloat(event.target.value, 2)
-                                updateProfile(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-            <button
-                onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-                className="btn btn-primary">
-                Save Profile
-            </button>
-        </form>
-    )
+        </fieldset>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                    required autoFocus
+                    type="text"
+                    className="form-control"
+                    value={profile?.email}
+                    onChange={
+                        (event) => {
+                            const copy = { ...profile }
+                            copy.email = event.target.value
+                            updateProfile(copy)
+                        }
+                    }></input>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="isAdmin">Admin?:</label>
+                <div>
+                <input
+                    required autoFocus
+                    type="checkbox"
+                    className="admin-checkbox"
+                    checked={profile?.isAdmin}
+                    onChange={
+                        (event) => {
+                            const copy = { ...profile }
+                            copy.isAdmin = event.target.checked
+                            updateProfile(copy)
+                        }
+                    }></input>
+                    </div>
+            </div>
+        </fieldset>
+        
+        <button
+            onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+            className="btn btn-primary">
+            Save Edits
+        </button>
+    </form>
+    <footer className="profileFooter"></footer>
+    </div>
+         )}
+    </div>
 }
