@@ -1,0 +1,102 @@
+.homePageContainer {
+    animation: .75s fadeInUp;
+}
+
+@keyframes fadeInUp {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+
+.homePageUserCoffeeShops {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.homePageUserCoffeeShop {
+    transition: box-shadow .3s;
+    background-color: #dab78d;
+    border: 1px dotted brown;
+    padding: 0.7rem;
+    margin: 1rem 0;
+    margin-right: 1rem;
+    border-radius: 5px;
+}
+
+.homePageUserCoffeeShop:hover {
+   
+    transform: translateY(0) scale(1.05);
+    box-shadow:  10px 10px 10px rgba(0, 0, 0, 0.74); 
+    cursor: pointer;
+}
+    
+
+.suggestedCoffeeShops {
+    animation: 2s backInRight;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.suggestedCoffeeShop {
+    transition: box-shadow .3s;
+    background-color: #dab78d;
+    border: 1px dotted brown;
+    padding: 0.7rem;
+    margin: 1rem 0;
+    margin-right: 1rem;
+    border-radius: 5px;
+}
+
+.suggestedCoffeeShop:hover {
+    transform: translateY(0) scale(1.05);
+    box-shadow:  5px 5px 10px rgba(0, 0, 0, 0.74); 
+    cursor: pointer;
+}
+
+
+
+.homePageWelcome {
+    
+    margin-left: 10%;
+   
+}
+
+.homePage-image {
+   
+    width: 100%;
+}
+
+.myListHeaderAndButtons {
+
+    margin-left: 10%;
+}
+
+.suggestedCoffeeShopsHeader {
+    margin-left: 10%;
+}
+   
+.homePageFooter {
+    width: 100%;
+    height: 100px;
+    margin-top: 75px;
+    background-color: #5c3f32;
+}
+
+
+
+
+
+ 

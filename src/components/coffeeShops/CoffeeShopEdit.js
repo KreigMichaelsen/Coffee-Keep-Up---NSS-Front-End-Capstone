@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom"
 
 
 export const CoffeeShopEdit = () => {
-    // TODO: This state object should not be blank
+
+    const [loading, setLoading] = useState(false);
     const [coffeeShop, assignCoffeeShop] = useState({
         name: "",
         address: "",
@@ -11,11 +12,17 @@ export const CoffeeShopEdit = () => {
         picture: ""
     })
 
-    // TODO: What is the variable in which you stored the route parameter?
+   
     const { coffeeShopId } = useParams()
     const navigate = useNavigate()
 
-    // TODO: Get the ticket state from the API.
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }, []);
+   
     useEffect(
         () => {
             fetch(`http://localhost:8088/coffeeShops/${coffeeShopId}`)
@@ -24,8 +31,16 @@ export const CoffeeShopEdit = () => {
                 assignCoffeeShop(data)
             })
         },
-        [coffeeShopId] // When this array is empty, you are observing initial component state
+        [coffeeShopId] 
     ) 
+
+    // useEffect(() => {
+    //     if (feedback !== "") {
+    //         // Clear feedback to make entire element disappear after 3 seconds
+    //         setTimeout(() => setFeedback(""), 3000);
+    //     }
+    // }, [feedback])
+    
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -39,13 +54,20 @@ export const CoffeeShopEdit = () => {
             .then(response => response.json())
             .then(() => {
                 navigate("/coffeeShops")
+                // setFeedback("Coffee Shop Updated Successfully!")
             })
-        // TODO: Write the fetch for the PUT request to replace the object being edited
+        
     }
 
 
-    return <form className="ticketForm">
-        <h2 className="ticketForm__title">Edit Coffee Shop</h2>
+    return <div className="container">
+    {loading ? (
+      <div className="loader-container">
+      </div>
+    ) : (
+      <div className="coffeeShopEditContainer">
+    <form className="ticketForm">
+        <h1 className="ticketForm__title">Edit Coffee Shop</h1>
         <fieldset>
             <div className="form-group">
                 <label htmlFor="name">Name:</label>
@@ -121,4 +143,7 @@ export const CoffeeShopEdit = () => {
             Save Edits
         </button>
     </form>
+    </div>
+         )}
+    </div>
 }

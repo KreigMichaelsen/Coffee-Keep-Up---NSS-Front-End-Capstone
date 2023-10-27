@@ -6,12 +6,20 @@ export const UserNav = () => {
 
     return (
         <ul className="navbar">
+             <li className="navbar__item active">
+             <Link className="navbar__link" to="/home">
+                <img src="/Images/coffeeshop (1).png" alt="coffeeLogo" style={{ width: 125, height: 125}}></img></Link>
+            </li>
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/coffeeShops">Coffee Shops</Link>
-                <li className="navbar__item acitve">
+            </li>
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="/userCoffeeShops">My List</Link>
+            </li>
+            <li className="navbar__item acitve">
                 <Link className="navbar__link" to="/Profile">Profile</Link>
             </li>
-            </li>
+            
             {
                 localStorage.getItem("coffee_user")
                     ? <li className="navbar__item navbar__logout">

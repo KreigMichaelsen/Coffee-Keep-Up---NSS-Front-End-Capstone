@@ -1,11 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const CoffeeShopForm = () => {
-    /*
-        TODO: Add the correct default properties to the
-        initial state object
-    */
+
+    const [loading, setLoading] = useState(false);
     const [coffeeShop, update] = useState({
         name: "",
         address: "",
@@ -13,19 +11,23 @@ export const CoffeeShopForm = () => {
         picture: ""
 
     })
-    /*
-        TODO: Use the useNavigation() hook so you can redirect
-        the user to the ticket list
-    */
+   
    const navigate = useNavigate()
 
    const localCoffeeUser = localStorage.getItem("coffee_user")
     const coffeeUserObject = JSON.parse(localCoffeeUser)
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }, []);
+
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        // TODO: Create the object to be saved to the API
+      
         const shopToSendToAPI = {
 
             name: coffeeShop.name,
@@ -34,7 +36,6 @@ export const CoffeeShopForm = () => {
             picture: coffeeShop.picture
         }
 
-        // TODO: Perform the fetch() to POST the object to the API
 
         return fetch(`http://localhost:8088/coffeeShops`, {
             method: "POST",
@@ -49,8 +50,13 @@ export const CoffeeShopForm = () => {
             })
     }
 
-    return (
-        <form className="ticketForm">
+    return <div className="container">
+    {loading ? (
+      <div className="loader-container">
+      </div>
+    ) : (
+      <div className="coffeeShopCreationFormContainer">
+        <form className="coffeeShopCreationForm">
             <h2 className="ticketForm__title">New Coffee Shop</h2>
             <fieldset>
                 <div className="form-group">
@@ -130,5 +136,8 @@ export const CoffeeShopForm = () => {
                 Submit Coffee Shop
             </button>
         </form>
-    )
+        <footer className="coffeeShopsCreationFormFooter"></footer>
+    </div>
+    )}
+    </div>
 }

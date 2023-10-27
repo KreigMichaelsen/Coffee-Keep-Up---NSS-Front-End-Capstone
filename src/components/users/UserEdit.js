@@ -2,66 +2,65 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
 
-export const UserForm = () => {
-    // TODO: This state object should not be blank
-
-    const localCoffeeUser = localStorage.getItem("coffee_user")
-    const coffeeUserObject = JSON.parse(localCoffeeUser)
-
-
-    const [profile, updateProfile] = useState({
+export const UserEdit = () => {
+    const [loading, setLoading] = useState(false);
+    
+    const [user, assignUser] = useState({
         fullName: "",
         email: "",
+        isAdmin: false,
     })
 
-    // const [feedback, setFeedback] = useState("")
-
-    // const [feedback, setFeedback] = useState("")
-    // TODO: What is the variable in which you stored the route parameter?
-
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }, []);
+   
+    const { userId } = useParams()
     const navigate = useNavigate()
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/users?id=${coffeeUserObject.id}`)
+            fetch(`http://localhost:8088/users/${userId}`)
             .then(response => response.json())
             .then((data) => {
-                const userObject = data[0]
-                updateProfile(userObject)
+                assignUser(data)
             })
         },
-        [] // When this array is empty, you are observing initial component state
+        [userId] 
     ) 
 
-    // useEffect(() => {
-    //     if (feedback !== "") {
-    //         // Clear feedback to make entire element disappear after 3 seconds
-    //         setTimeout(() => setFeedback(""), 3000);
-    //     }
-    // }, [feedback])
     
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
-        return fetch(`http://localhost:8088/users/${profile.id}`, {
+        return fetch(`http://localhost:8088/users/${user.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(profile)
+            body: JSON.stringify(user)
         })
             .then(response => response.json())
             .then(() => {
-                navigate("/")
-                // window.alert("Profile successfully saved")
+                navigate("/users")
+              
                 // setFeedback("Coffee Shop Updated Successfully!")
             })
         // TODO: Write the fetch for the PUT request to replace the object being edited
     }
 
 
-    return <form className="userEditForm">
-        <h2 className="userEditForm__title">Edit User</h2> 
+    return <div className="container">
+    {loading ? (
+      <div className="loader-container">
+      </div>
+    ) : (
+      <div className="userEditFormContainer">
+    <form className="userEditForm">
+        <h1 className="userEditForm__title">Edit User</h1>
         <fieldset>
             <div className="form-group">
                 <label htmlFor="name">Name:</label>
@@ -69,12 +68,12 @@ export const UserForm = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    value={profile.fullName}
+                    value={user.fullName}
                     onChange={
                         (event) => {
-                            const copy = { ...profile }
+                            const copy = { ...user }
                             copy.fullName = event.target.value
-                            updateProfile(copy)
+                            assignUser(copy)
                         }
                     }></input>
             </div>
@@ -86,17 +85,35 @@ export const UserForm = () => {
                     required autoFocus
                     type="text"
                     className="form-control"
-                    value={profile.email}
+                    value={user.email}
                     onChange={
                         (event) => {
-                            const copy = { ...profile }
+                            const copy = { ...user }
                             copy.email = event.target.value
-                            updateProfile(copy)
+                            assignUser(copy)
                         }
                     }></input>
             </div>
         </fieldset>
-       
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="isAdmin">Admin?:</label>
+                <div>
+                <input
+                    required autoFocus
+                    type="checkbox"
+                    className="admin-checkbox"
+                    checked={user.isAdmin}
+                    onChange={
+                        (event) => {
+                            const copy = { ...user }
+                            copy.isAdmin = event.target.checked
+                            assignUser(copy)
+                        }
+                    }></input>
+                    </div>
+            </div>
+        </fieldset>
         
         <button
             onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
@@ -104,4 +121,7 @@ export const UserForm = () => {
             Save Edits
         </button>
     </form>
+    </div>
+          )}
+    </div>
 }

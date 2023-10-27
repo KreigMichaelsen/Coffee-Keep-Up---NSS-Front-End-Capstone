@@ -12,7 +12,7 @@ fieldset {
 .form--login {
     display: inline-block;
     margin: 0 auto;
-    text-align: left;
+    text-align: center;
 }
 
 .form--login > fieldset > input[type="email"] {
@@ -24,8 +24,8 @@ fieldset {
     display: inline-block;
 }
 
-.form-control {
-    display: block;
+.email-form {
+    display: inline-block;
     width: 94%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
@@ -33,24 +33,42 @@ fieldset {
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: white;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: .25rem;
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+ 
 }
 
-.container--login {
+.loginContainer {
+    text-align: center;
+    animation: .50s fadeIn;
+
+}
+.registerContainer {
+    animation: .50s fadeIn;
     text-align: center;
 }
 
+@keyframes fadeIn {
+    0% {
+      /* transform: translateY(100%); */
+      opacity: 0;
+    }
+    100% {
+      /* transform: translateY(0%); */
+      opacity: 1;
+    }
+  }
+
 .form--login {
-    background-position-x: right;
+    background-position-x: center;
     z-index: 1;
     min-height: 25rem;
     min-width: 45rem;
-    background-color: hsla(0,0%,100%,0.40);
+    background-color: #fff5e9;
     background-blend-mode: overlay;
     background-repeat: no-repeat;
 }
@@ -59,4 +77,5 @@ fieldset {
     position: relative;
     bottom: -2rem;
 }
+
 

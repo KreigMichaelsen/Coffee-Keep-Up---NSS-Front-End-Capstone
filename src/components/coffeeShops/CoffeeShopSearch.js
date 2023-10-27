@@ -1,13 +1,13 @@
-export const CoffeeShopSearch = ({setterFunction}) => {
+export const CoffeeShopSearch = ({setterFunction, searchTermState}) => {
     return (
         <div>
-            <input 
+            <input className="coffeeShopsSearchBar"
             onChange={
-                (changeEvent) => {
-                    setterFunction(changeEvent.target.value)
+                (event) => {
+                    setterFunction(event.target.value)
                 }
             }
-             type="text" placeholder="Enter search terms" />
+             type="text" placeholder="Search Coffee Shops..." />
         </div>
     )
 }
