@@ -7,11 +7,9 @@ export const Profile = () => {
     const coffeeUserObject = JSON.parse(localCoffeeUser)
 
     if(coffeeUserObject.admin) {
-        // Return employee views
         return <AdminForm />
     }
     else {
-        // Return customer views
         return <UserForm />
     }
 }

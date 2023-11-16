@@ -4,7 +4,6 @@ import "./Profile.css"
 
 
 export const AdminForm = () => {
-    // TODO: This state object should not be blank
     const [loading, setLoading] = useState(false);
    
 
@@ -25,8 +24,7 @@ export const AdminForm = () => {
         }, 500);
       }, []);
 
-    // const [feedback, setFeedback] = useState("")
-    // TODO: What is the variable in which you stored the route parameter?
+
 
     const navigate = useNavigate()
 
@@ -39,7 +37,7 @@ export const AdminForm = () => {
                 updateProfile(userObject)
             })
         },
-        [] // When this array is empty, you are observing initial component state
+        [] 
     ) 
 
 
@@ -55,10 +53,8 @@ export const AdminForm = () => {
             .then(response => response.json())
             .then(() => {
                 navigate("/")
-                // window.alert("Profile successfully saved")
-                // setFeedback("Coffee Shop Updated Successfully!")
             })
-        // TODO: Write the fetch for the PUT request to replace the object being edited
+       
     }
 
 

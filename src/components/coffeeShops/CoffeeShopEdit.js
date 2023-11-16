@@ -34,13 +34,6 @@ export const CoffeeShopEdit = () => {
         [coffeeShopId] 
     ) 
 
-    // useEffect(() => {
-    //     if (feedback !== "") {
-    //         // Clear feedback to make entire element disappear after 3 seconds
-    //         setTimeout(() => setFeedback(""), 3000);
-    //     }
-    // }, [feedback])
-    
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -54,7 +47,6 @@ export const CoffeeShopEdit = () => {
             .then(response => response.json())
             .then(() => {
                 navigate("/coffeeShops")
-                // setFeedback("Coffee Shop Updated Successfully!")
             })
         
     }

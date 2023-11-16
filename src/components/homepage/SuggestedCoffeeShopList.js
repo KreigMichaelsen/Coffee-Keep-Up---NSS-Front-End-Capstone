@@ -36,21 +36,6 @@ export const SuggestedCoffeeShopList = () => {
     )
 
 
-    // place to store four numbers (array)
-    // loop that runs while that array length is less than 4
-    // extract random number
-    // determine if number is in array already 
-    // if not push into array 
-    // return array to wherever its being called
-    // loop through ids, and make four fetch calls
-    // then set to randomCoffeeshops state 
-
-    // const testRandom = (element, id) => {
-    //     console.log("test id ", element.id, "random id ", id)
-    //     console.log(element.id === id)
-    //     return element.id === id
-    // }
-
 
     const getRandomCoffeeShops = async () => {
         let randomNumberArray = []

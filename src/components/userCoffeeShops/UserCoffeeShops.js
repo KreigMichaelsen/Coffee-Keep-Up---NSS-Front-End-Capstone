@@ -30,18 +30,6 @@ export const UserCoffeeShops = () => {
         []
     )
 
-
-    // useEffect(
-    //     () => {
-    //         fetch(`http://localhost:8088/userCoffeeShops?_expand=coffeeShop&userId=${coffeeUserObject.id}`)
-    //         .then(response => response.json())
-    //         .then((filteredUserCoffeeShopArray) => {
-    //             setFilteredUserCoffeeShops(filteredUserCoffeeShopArray)
-    //         })
-    //     },
-    //     []
-    // )
-
     useEffect(
         () => {
             if (hasVisited) {
@@ -51,7 +39,7 @@ export const UserCoffeeShops = () => {
             else {
                 const visitedCoffeeShops = userCoffeeShops.filter(userCoffeeShop => userCoffeeShop.hasVisited === false)
                 setFilteredUserCoffeeShops(visitedCoffeeShops)
-                // getAllFilteredUserCoffeeShops()
+                
             }
         },
         [hasVisited]

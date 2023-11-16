@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 
 
 export const UserForm = () => {
-    // TODO: This state object should not be blank
+
 
     const localCoffeeUser = localStorage.getItem("coffee_user")
     const coffeeUserObject = JSON.parse(localCoffeeUser)
@@ -13,11 +13,6 @@ export const UserForm = () => {
         fullName: "",
         email: "",
     })
-
-    // const [feedback, setFeedback] = useState("")
-
-    // const [feedback, setFeedback] = useState("")
-    // TODO: What is the variable in which you stored the route parameter?
 
     const navigate = useNavigate()
 
@@ -30,16 +25,9 @@ export const UserForm = () => {
                 updateProfile(userObject)
             })
         },
-        [] // When this array is empty, you are observing initial component state
+        [] 
     ) 
 
-    // useEffect(() => {
-    //     if (feedback !== "") {
-    //         // Clear feedback to make entire element disappear after 3 seconds
-    //         setTimeout(() => setFeedback(""), 3000);
-    //     }
-    // }, [feedback])
-    
 
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -53,10 +41,7 @@ export const UserForm = () => {
             .then(response => response.json())
             .then(() => {
                 navigate("/")
-                // window.alert("Profile successfully saved")
-                // setFeedback("Coffee Shop Updated Successfully!")
             })
-        // TODO: Write the fetch for the PUT request to replace the object being edited
     }
 
 

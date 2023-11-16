@@ -47,9 +47,7 @@ export const UserEdit = () => {
             .then(() => {
                 navigate("/users")
               
-                // setFeedback("Coffee Shop Updated Successfully!")
             })
-        // TODO: Write the fetch for the PUT request to replace the object being edited
     }
 
 

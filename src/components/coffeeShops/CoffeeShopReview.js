@@ -43,12 +43,6 @@ export const CoffeeShopReview = ({reviewObject, currentUser, getAllReviews, getC
             deleteButton()
         }
 
-        {
-            // <button onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}/edit`)}>Edit Coffee Shop</button>
-        }
-        {
-            // <button onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}/review`)}>Leave a Review!</button>
-        }
      </footer>
  </section>
 }

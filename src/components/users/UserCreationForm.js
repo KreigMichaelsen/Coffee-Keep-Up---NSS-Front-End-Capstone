@@ -2,20 +2,14 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export const UserCreationForm = () => {
-    /*
-        TODO: Add the correct default properties to the
-        initial state object
-    */
+    
     const [user, update] = useState({
         fullName: "",
         email: "",
         isAdmin: false
 
     })
-    /*
-        TODO: Use the useNavigation() hook so you can redirect
-        the user to the ticket list
-    */
+   
    const navigate = useNavigate()
 
    const localCoffeeUser = localStorage.getItem("coffee_user")
@@ -24,7 +18,6 @@ export const UserCreationForm = () => {
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
-        // TODO: Create the object to be saved to the API
         const userToSendToAPI = {
 
             fullName: user.fullName,
@@ -32,7 +25,6 @@ export const UserCreationForm = () => {
             isAdmin: user.isAdmin
         }
 
-        // TODO: Perform the fetch() to POST the object to the API
 
         return fetch(`http://localhost:8088/users`, {
             method: "POST",

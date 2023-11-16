@@ -24,41 +24,6 @@ export const UserCoffeeShop = ({id, fullName, email, getAllFilteredUserCoffeeSho
         
     }
 
-    // const getUserCoffeeShopReviews = () => {
-    //     fetch(`http://localhost:8088/reviews?_expand=user&_expand=coffeeShop`)
-    //     .then(respone => respone.json())
-    //     .then((reviewArray) => {
-    //         setReview(reviewArray)
-    //     })
-    // }
-
-    // useEffect(
-    //     () => {
-    //         getUserCoffeeShopReviews()
-           
-    //     },
-    //     [] 
-    // ) 
-
-    // const findMatchingReview = () => {
-    //     let matchingReviewArray = []
-    //     for ( const review of reviews) {
-    //         if (review.userId === currentUser.id && review.coffeeShopId === userCoffeeShop.coffeeShopId) {
-    //             matchingReviewArray.push(review)
-    //             console.log(matchingReviewArray)
-    //         }
-    //         else {
-    //             return ""
-    //         }
-                
-    //     }
-    // }
-
-
-
-    
-   
-
 
     return <section className="user-coffee-shop">
     <h3>{name}</h3>

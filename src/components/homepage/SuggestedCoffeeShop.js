@@ -66,10 +66,6 @@ export const SuggestedCoffeeShop = ({coffeeShopObject, currentUser, getAllCoffee
             :  AddButton()
         }
         {
-            // deleteButton()
-        }
-
-        {
             <button onClick={() => navigate(`/coffeeShops/${coffeeShopObject.id}/edit`)}>Edit Coffee Shop</button>
         }
         {

@@ -8,11 +8,9 @@ export const ApplicationViews = () => {
     const coffeeUserObject = JSON.parse(localCoffeeUser)
 
     if(coffeeUserObject.admin) {
-        // Return employee views
         return <AdminViews />
     }
     else {
-        // Return customer views
         return <UserViews />
     }
 
